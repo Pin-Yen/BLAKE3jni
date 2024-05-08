@@ -18,6 +18,25 @@ inThisBuild(
 
 publishMavenStyle := true
 
+// GitHub Package Registry settings
+publishTo := {
+  val githubOwner = "Pin-Yen"
+  val githubToken = sys.env.get("GITHUB_TOKEN").orElse(sys.error("GitHub token is required"))
+  val githubPackageRegistry = s"https://maven.pkg.github.com/$githubOwner/BLAKE3jni"
+  if (isSnapshot.value) {
+    Some("GitHub Packages" at s"$githubPackageRegistry/snapshots")
+  } else {
+    Some("GitHub Packages" at s"$githubPackageRegistry/releases")
+  }
+}
+
+credentials += Credentials(
+  "GitHub Package Registry",
+  "maven.pkg.github.com",
+  sys.env.getOrElse("GITHUB_USERNAME", ""),
+  sys.env.getOrElse("GITHUB_TOKEN", "")
+)
+
 testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
 
 name := "BLAKE3jni"
