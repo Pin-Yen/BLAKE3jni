@@ -26,7 +26,7 @@ version := "0.2.2"
 
 libraryDependencies ++= List(
   "com.novocode" % "junit-interface" % "0.11" % "test",
-  "org.scijava" % "native-lib-loader" % "2.3.4",
+  "org.scijava" % "native-lib-loader" % "2.5.0",
   "org.slf4j" % "slf4j-nop" % "1.7.30"
 )
 
